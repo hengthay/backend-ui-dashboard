@@ -3,20 +3,21 @@ import { IoMdAdd } from "react-icons/io";
 import { fetchProduct, selectAllProducts, selectProductStatus } from '../features/products/productSlice';
 import { useDispatch, useSelector } from 'react-redux';
 import ProductCard from '../components/ProductCard';
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 
 const Products = () => {
   const status = useSelector(selectProductStatus);
   const dispatch = useDispatch();
   const products = useSelector(selectAllProducts);
+  const location = useLocation();
 
   useEffect(() => {
 
-    if(status === 'idle') {
+    if(location.pathname === '/products') {
       dispatch(fetchProduct());
     }
 
-  }, [status, dispatch]);
+  }, [location.pathname, dispatch]);
 
   if(status === 'failed') return <p>Product cannot be fetch</p>;
 

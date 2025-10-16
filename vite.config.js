@@ -9,5 +9,5 @@ export default defineConfig({
     tailwindcss(),
   ],
   // Basename of website
-  base: "/backend-ui-dashboard",
+  base: "/",
 })

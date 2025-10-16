@@ -53,8 +53,14 @@ export const createProduct = createAsyncThunk('/products/createProduct', async (
 });
 
 // Implement on update product by using id
-export const updateProduct = createAsyncThunk('/products/updateProduct', async ({id, productData}, thunkAPI) => {
+export const updateProduct = createAsyncThunk('/products/updateProduct', async (payload, thunkAPI) => {
   try {
+    // 1. Destructure the ID from the payload for the URL
+    const id = payload.id;
+
+    // 2. Separate the ID from the rest of the data for the request body
+    const {id: _, ...productData} = payload;
+    
     const res = await axios.put(`http://localhost:3001/api/products/${id}`, productData);
 
     if(!res) return console.log('Unable to update products');
