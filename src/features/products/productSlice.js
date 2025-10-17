@@ -36,6 +36,7 @@ export const fetchProductById = createAsyncThunk('/products/fetchProductById', a
   }
 });
 
+
 // Implement on create product
 export const createProduct = createAsyncThunk('/products/createProduct', async (productData, thunkAPI) => {
 

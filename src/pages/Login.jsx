@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { useDispatch } from 'react-redux'
 import { Link, useNavigate } from 'react-router-dom'
 import { loginUser } from '../features/auth/authSlice'
@@ -59,8 +59,14 @@ const Login = () => {
       [name]: e.target.value
     })
   }
+  const token = localStorage.getItem("token");
 
-
+  useEffect(() => {
+    if(token) {
+      navigate('/')
+    }
+  }, [token]);
+  
   if(error) return <p className='text-center mt-20 text-2xl underline underline-offset-4 text-gray-400 font-medium border border-dashed flex justify-center mx-auto items-center w-[700px] p-3 shadow'>The Website is cannot reload. Please try again later!</p>
   // console.log(formData);
   return (

@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { useNavigate, useParams } from 'react-router-dom';
+import { useLocation, useNavigate, useParams } from 'react-router-dom';
 import { fetchProductById, selectProductById, selectProductStatus, updateProduct } from '../features/products/productSlice';
 import { IoMdAdd } from 'react-icons/io';
 import { FiUpload } from 'react-icons/fi';
@@ -16,7 +16,8 @@ const EditProductForm = () => {
     price: 0,
     stock: 0,
     rating: 0,
-    category_id: 1
+    category_id: 1,
+    descriptions: ""
   });
   const dispatch = useDispatch();
   const productData = useSelector(selectProductById);
@@ -24,7 +25,7 @@ const EditProductForm = () => {
   const [error, setError] = useState(null);
   const {id} = useParams(); 
   const navigate = useNavigate();
-
+  console.log("location", location.pathname);
   console.log('Received id----', id);
   // Fetch Individual Product with id
   useEffect(() => {
@@ -32,12 +33,12 @@ const EditProductForm = () => {
       console.log('ID is not received')
       return;
     }
-    
-    if(productStatus === 'idle' || (productData && productData.id !== Number(id))) {
+    // Check if id present and productStatus is idle or productData is not present or productData.id not equal to id received. So the dispatch will trigger the action to redux.
+    if(id && (productStatus === "idle" || !productData || productData.id !== Number(id))) {
       dispatch(fetchProductById(id));
     }
     
-  }, [id, dispatch, productData, productStatus]);
+  }, [id, dispatch]);
 
   // Initialize local formData with the fetched product data
   useEffect(() => {
@@ -50,7 +51,8 @@ const EditProductForm = () => {
         stock: Number(productData.stock) || 0,
         rating: Number(productData.rating) || 0,
         // Ensure category_id is set correctly for the select box
-        category_id: Number(productData.category_id) || 1
+        category_id: Number(productData.category_id) || 1,
+        descriptions: productData.descriptions || ""
       });
     }
   }, [productData, id]);
@@ -69,7 +71,8 @@ const EditProductForm = () => {
         price: Number(formData.price),
         stock: Number(formData.stock),
         rating: Number(formData.rating),
-        category_id: Number(formData.category_id)
+        category_id: Number(formData.category_id),
+        descriptions: formData.descriptions
       };
 
       if(isNaN(payload.price) || isNaN(payload.stock) || isNaN(payload.rating) || isNaN(payload.category_id)) {
@@ -77,8 +80,8 @@ const EditProductForm = () => {
         return;
       }
 
-      if(!payload.title || !payload.image || payload.price === 0 || payload.stock === 0 || payload.rating === 0 || !payload.category_id) {
-        setError("Title, Image, Price, Stock, and Category ID are required fields.");
+      if(!payload.title || !payload.image || payload.price === 0 || payload.stock === 0 || payload.rating === 0 || !payload.category_id || !payload.descriptions) {
+        setError("Title, Image, Price, Stock, Category ID, and Descriptions are required fields.");
         return;
       }
 
@@ -148,7 +151,7 @@ const EditProductForm = () => {
   // console.log(`Product with id:${id}`, products)
 
   // Display loading state
-  if (productStatus === 'loading') {
+  if (productStatus === 'loading' || !productData) {
     return <div className='flex justify-center items-center min-h-screen w-screen text-gray-800 sm:text-lg text-base font-medium'>Loading Product Data...</div>;
   }
 
@@ -263,6 +266,21 @@ const EditProductForm = () => {
                     <option value="3">Electronics</option>
                   </select>
                 </div>
+              </div>
+              <div className='flex flex-col w-full space-y-2'>
+                <label 
+                className='font-medium sm:text-base text-[15px]'
+                htmlFor="descriptions">Description</label>
+                <textarea 
+                name="descriptions" 
+                id="descriptions" 
+                rows={8}
+                className='border border-gray-300 rounded-lg px-2 py-1.5 focus:outline-blue-500 focus:outline-1 placeholder:text-sm'
+                value={formData.descriptions}
+                onChange={handleOnChange}
+                placeholder="Write your product description here..."
+                >
+                </textarea>
               </div>
               {error && <p className='text-center text-red-500 font-medium sm:text-base md:text-lg text-sm'>{error}</p>}
             </div>

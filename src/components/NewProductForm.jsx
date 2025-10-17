@@ -14,7 +14,8 @@ const NewProductForm = () => {
     price: 0,
     stock: 0,
     rating: 0,
-    category_id: 1
+    category_id: 1,
+    descriptions: ""
   });
   const [error, setError] = useState(null);
   const dispatch = useDispatch();
@@ -31,7 +32,8 @@ const NewProductForm = () => {
         price: Number(formData.price),
         stock: Number(formData.stock),
         rating: Number(formData.rating),
-        category_id: Number(formData.category_id)
+        category_id: Number(formData.category_id),
+        descriptions: formData.descriptions
       };
 
       if(isNaN(payload.price) || isNaN(payload.stock) || isNaN(payload.rating) || isNaN(payload.category_id)) {
@@ -39,8 +41,8 @@ const NewProductForm = () => {
         return;
       }
 
-      if(!payload.title || !payload.image || payload.price === 0 || payload.stock === 0 || payload.rating === 0 || !payload.category_id) {
-        setError("Title, Image, Price, Stock, and Category ID are required fields.");
+      if(!payload.title || !payload.image || payload.price === 0 || payload.stock === 0 || payload.rating === 0 || !payload.category_id || !payload.descriptions) {
+        setError("Title, Image, Price, Stock, Category ID, and Descriptions are required fields.");
         return;
       }
 
@@ -203,6 +205,21 @@ const NewProductForm = () => {
                     <option value="3">Electronics</option>
                   </select>
                 </div>
+              </div>
+              <div className='flex flex-col w-full space-y-2'>
+                <label 
+                className='font-medium sm:text-base text-[15px]'
+                htmlFor="descriptions">Description</label>
+                <textarea 
+                name="descriptions" 
+                id="descriptions" 
+                rows={8}
+                className='border border-gray-300 rounded-lg px-2 py-1.5 focus:outline-blue-500 focus:outline-1 placeholder:text-sm'
+                value={formData.descriptions}
+                onChange={handleOnChange}
+                placeholder="Write your product description here..."
+                >
+                </textarea>
               </div>
               {error && <p className='text-center text-red-500 font-medium sm:text-base md:text-lg text-sm'>{error}</p>}
             </div>
