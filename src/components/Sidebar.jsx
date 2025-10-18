@@ -36,7 +36,7 @@ const SideBar = ({isOpen, onClose}) => {
 
       {/* Sidebar Container */}
       <aside
-        className={`fixed top-0 left-0 md:min-h-screen max-sm:min-h-[200vh] w-64 bg-white border-r border-gray-200 shadow-md flex flex-col justify-between z-20 transform transition-transform duration-300
+        className={`fixed top-0 left-0 md:min-h-screen max-sm:min-h-[127vh] w-64 bg-white border-r border-gray-200 shadow-md flex flex-col justify-between z-20 transform transition-transform duration-300
           ${isOpen ? "translate-x-0 mt-4" : "-translate-x-full"} md:translate-x-0`}
       >
         {/* Top Section */}

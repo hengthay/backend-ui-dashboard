@@ -10,6 +10,7 @@ import NewProductForm from './components/NewProductForm'
 import NotFound from './pages/NotFount'
 import EditProductForm from './components/EditProductForm'
 import ProductDetails from './components/ProductDetails'
+import RemoveProduct from './components/RemoveButton'
 
 const App = () => {
   return (
@@ -28,7 +29,7 @@ const App = () => {
         <Route path='/products/new' element={<NewProductForm />}/>
         <Route path='/products/:id/edit-product' element={<EditProductForm />}/>
         <Route path='/products/:id' element={<ProductDetails />}/>
-        
+        <Route path='/products/:id/remove-product' element={<RemoveProduct />}/>
       </Route>
       {/* === 404 Fallback === */}
       <Route path="*" element={<NotFound />} />

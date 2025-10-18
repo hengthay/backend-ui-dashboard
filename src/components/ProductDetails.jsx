@@ -53,7 +53,7 @@ const ProductDetails = () => {
   }
     
   return (
-    <div className='flex overflow-hidden bg-white mt-23 md:ml-[261px] md:w-[1425px] w-[650px] max-sm:max-w-[550px] mx-3 min-h-screen h-auto p-6 sm:mx-8 z-[-10]'>
+    <div className='flex overflow-hidden bg-white mt-23 md:ml-[261px] md:w-[1425px] w-[650px] max-sm:max-w-[550px] mx-3 min-h-screen h-auto p-6 sm:mx-8 z-[-10] border border-gray-200 shadow-md'>
       <div className='md:p-4 p-2 w-full space-y-3'>
         <div className='flex justify-between items-center'>
           <div className='flex justify-center items-center gap-x-2'>

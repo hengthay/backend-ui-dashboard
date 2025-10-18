@@ -21,7 +21,7 @@ const Navbar = ({isOpen, handleOpenMenu}) => {
   // console.log("Current User:", user);
 
   return (
-    <header className="max-w-[1425px] lg:w-full fixed top-0 left-0 right-0 z-20 bg-white shadow-md border-b border-gray-200 md:ml-65">
+    <header className="max-w-[1425px] lg:w-full fixed top-0 left-0 right-0 z-20 bg-white shadow-md border-b border-gray-200 md:ml-66">
       <div className="flex justify-between items-center px-4 sm:px-6 md:px-10 py-4">
         {/* Left Side */}
         <div className="flex items-center gap-x-3">

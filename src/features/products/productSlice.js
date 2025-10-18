@@ -91,9 +91,10 @@ export const deleteProduct = createAsyncThunk('/products/deleteProduct', async (
   try {
     const res = await axios.delete(`http://localhost:3001/api/products/${id}`);
 
-    if(!res) return console.log(`Product with id:${id} not exists`);
-
-    return res.data.data;
+    if(!res) return console.log(`Product with id: ${id} not exists`);
+    
+    return res.data;
+    
   } catch (error) {
     console.log('Error delete product: ', error);
     return thunkAPI.rejectWithValue(error.response?.data?.message || "Delete failed");

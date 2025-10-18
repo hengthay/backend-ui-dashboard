@@ -26,7 +26,7 @@ const Products = () => {
   // console.log('Product Received:-------', products);
   
   return (
-    <div className="space-y-6 mt-23 md:ml-66 bg-white/90 min-h-screen md:w-[1420px] w-[650px] max-sm:max-w-[500px] p-6 sm:mx-8 z-[-10]">
+    <div className="space-y-6 mt-23 md:ml-65 bg-white/90 min-h-screen md:w-[1420px] w-[650px] max-sm:max-w-[500px] p-6 sm:mx-8 z-[-10] border border-gray-200 shadow-md">
       {/* Added New Product */}
       <div className='flex justify-between items-center'>
         <div>

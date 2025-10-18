@@ -95,7 +95,7 @@ const Login = () => {
             />
           </div>
           <div className='mt-2'>
-            <button type='submit' className='bg-black text-white font-semibold px-2 py-1.5 rounded-md w-[250px] hover:bg-transparent hover:text-black hover:border-1 transition ease-in-out duration-200'>
+            <button type='submit' className='bg-black text-white font-semibold px-2 py-1.5 rounded-md w-[250px] border border-transparent hover:bg-transparent hover:text-black hover:border-1 hover:border-black transition ease-in-out duration-200'>
               {isLoading ? '...Loading' : 'Login'}
             </button>
           </div>

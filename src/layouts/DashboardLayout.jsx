@@ -14,13 +14,13 @@ const DashboardLayout = () => {
   }
 
   return (
-    <div className='flex min-h-screen bg-gray-100'>
+    <div className='flex min-h-screen w-full'>
       <SideBar isOpen={isOpen} onClose={handleOpenMenu}/>
      
       <div className='max-w-6xl'>
         {/* NavBar */}
         <Navbar handleOpenMenu={handleOpenMenu}/>  
-        <main>
+        <main className='p-1'>
           <Outlet />
         </main>
       </div>
