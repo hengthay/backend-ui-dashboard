@@ -36,7 +36,19 @@ export const fetchProductById = createAsyncThunk('/products/fetchProductById', a
   }
 });
 
+// Implement on fetch product detail by id
+export const fetchProductDetailById = createAsyncThunk('/products/fetchProductDetailById', async (id, thunkAPI) => {
+  try {
+    const res = await axios.get(`http://localhost:3001/api/products/detail/${id}`);
 
+    if(!res) return console.log(`Product detail with id:${id} not exists`);
+
+    return res.data.data;
+  } catch (error) {
+    console.log('Erorr on fetched product detail by id: ',error);
+    return thunkAPI.rejectWithValue(error.response?.data?.message || `Unable to fetch product detail with id:${id}`);
+  }
+});
 // Implement on create product
 export const createProduct = createAsyncThunk('/products/createProduct', async (productData, thunkAPI) => {
 
@@ -123,7 +135,19 @@ export const productSlice = createSlice({
         state.status = 'failed';
         state.error = action.payload;
       })
-      
+      // Fetch Product detail by id
+      .addCase(fetchProductDetailById.pending, (state) => {
+        state.error = null;
+        state.status = 'loading';
+      })
+      .addCase(fetchProductDetailById.fulfilled, (state, action) => {
+        state.status = 'succeeded';
+        state.selectedItem = action.payload;
+      })
+      .addCase(fetchProductDetailById.rejected, (state, action) => {
+        state.status = 'failed';
+        state.error = action.payload;
+      })
       // Create
       .addCase(createProduct.fulfilled, (state, action) => {
         state.items.push(action.payload);
